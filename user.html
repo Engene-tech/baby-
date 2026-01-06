@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI Platform - Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="user-view">
+        <nav class="top-bar">
+            <div class="logo-group">
+                <span class="logo">Nexus AI</span>
+                <span class="badge" id="userBadge">🔒 Domain Access</span>
+            </div>
+            <div class="user-avatar" id="userAvatar">U</div>
+        </nav>
+        <div class="chat-content">
+            <div class="chat-welcome">
+                <div class="ai-orb"><i data-lucide="sparkles"></i></div>
+                <h2>How can I help you today?</h2>
+                <p id="userInstructionText">Ask me anything about the resources available in your domain.</p>
+            </div>
+
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <input type="text" id="chatInput" placeholder="Ask me anything...">
+                    <button class="send-btn" id="sendBtn"><i data-lucide="send"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/user.js"></script>
+</body>
+</html>

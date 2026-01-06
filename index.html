@@ -8,185 +8,25 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-
-    <div id="auth-view" class="view signup-container">
-        <div class="signup-card">
-            <div class="header-icon">
-                <i data-lucide="user-plus"></i>
-            </div>
-
-            <h1>Create Account</h1>
-            <p class="subtitle">Join our platform to get started</p>
-
-            <div class="role-selector">
-                <div class="role-option active" id="userRole">
-                    <i data-lucide="users"></i>
-                    <div class="role-info">
-                        <strong>User</strong>
-                        <span>Ask questions</span>
-                    </div>
+    <div class="landing-container">
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-icon">
+                    <i data-lucide="brain"></i>
                 </div>
-                <div class="role-option" id="adminRole">
-                    <i data-lucide="shield"></i>
-                    <div class="role-info">
-                        <strong>Admin</strong>
-                        <span>Upload resources</span>
-                    </div>
-                </div>
-            </div>
-
-            <form class="signup-form" id="mainSignupForm">
-                <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="bolt" required>
-                </div>
-
-                <div class="row">
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" placeholder="........." required>
-                    </div>
-                    <div class="input-group">
-                        <label>Confirm Password</label>
-                        <input type="password" placeholder="Confirm password" required>
-                    </div>
-                </div>
-
-                <div class="checkbox-container">
-                    <input type="checkbox" id="generalUser">
-                    <label for="generalUser">General User (Access all resources from all domains)</label>
-                </div>
-
-                <div class="input-group" id="domainGroup">
-                    <label>Select Your Domain</label>
-                    <select id="domainSelect">
-                        <option value="" disabled selected>Choose a domain...</option>
-                        <option value="Legal">Legal</option>
-                        <option value="Medical">Medical</option>
-                        <option value="Technology">Technology</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="submit-btn">Create Account</button>
-            </form>
-
-            <p class="footer-text">Already have an account? <a href="#">Sign in</a></p>
-        </div>
-    </div>
-
-    <div id="admin-view" class="view" style="display:none;">
-        <nav class="top-bar">
-            <span class="logo"><i data-lucide="shield-check"></i> Admin Portal</span>
-            <button class="logout" onclick="logout()"><i data-lucide="log-out"></i></button>
-        </nav>
-        <div class="admin-content">
-            <h1>Upload Resources</h1>
-            <p>Sector: <strong id="adminSectorLabel">Assigned Domain</strong></p>
-            <div class="upload-zone">
-                <i data-lucide="upload-cloud"></i>
-                <p>Drag & drop PDFs here</p>
-                <button class="btn-primary">Browse Files</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="user-view" class="view" style="display:none;">
-        <nav class="top-bar">
-            <div class="logo-group">
-                <span class="logo">Nexus AI</span>
-                <span class="badge" id="userBadge">🔒 Medical Domain</span>
-            </div>
-            <div class="user-avatar">JD</div>
-        </nav>
-        <div class="chat-content">
-            <div class="chat-welcome">
-                <div class="ai-orb"><i data-lucide="sparkles"></i></div>
-                <h2>How can I help you today?</h2>
-                <p id="userInstructionText">Ask me anything about the resources available in your domain.</p>
-            </div>
-            
-            <div class="chat-input-area">
-                <div class="input-wrapper">
-                    <input type="text" id="chatInput" placeholder="Ask me anything...">
-                    <button class="send-btn"><i data-lucide="send"></i></button>
+                <h1>Nexus AI Platform</h1>
+                <p>Secure, domain-specific AI assistance powered by your organization's knowledge base.</p>
+            <div class="hero-actions">
+                    <a href="signup.html" class="btn-primary">Get Started</a>
+                    <a href="signin.html" class="btn-secondary">Sign In</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize Icons
+        // Initialize Lucide icons
         lucide.createIcons();
-
-        // Elements
-        const userBtn = document.getElementById('userRole');
-        const adminBtn = document.getElementById('adminRole');
-        const signupForm = document.getElementById('mainSignupForm');
-        const domainGroup = document.getElementById('domainGroup');
-        const domainSelect = document.getElementById('domainSelect');
-        const generalUserCheck = document.getElementById('generalUser');
-
-        let selectedRole = 'user';
-
-        // Toggle Logic for Role Selection
-        userBtn.onclick = () => {
-            selectedRole = 'user';
-            userBtn.classList.add('active');
-            adminBtn.classList.remove('active');
-            domainGroup.style.display = 'block';
-        };
-
-        adminBtn.onclick = () => {
-            selectedRole = 'admin';
-            adminBtn.classList.add('active');
-            userBtn.classList.remove('active');
-            // Admins usually manage a fixed domain assigned by the org
-            domainGroup.style.display = 'block'; 
-        };
-
-        // Switch View Function
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
-            const target = document.getElementById(viewId + '-view');
-            target.style.display = (viewId === 'auth') ? 'flex' : 'flex';
-            if(viewId !== 'auth') target.style.flexDirection = 'column';
-        }
-
-        // Form Submission Logic
-        signupForm.onsubmit = (e) => {
-            e.preventDefault();
-            
-            const domain = domainSelect.value;
-            const isGeneral = generalUserCheck.checked;
-
-            if (selectedRole === 'admin') {
-                document.getElementById('adminSectorLabel').innerText = domain || "General Compliance";
-                showView('admin');
-            } else {
-                // Update User UI based on choice
-                const badge = document.getElementById('userBadge');
-                const instruction = document.getElementById('userInstructionText');
-                const input = document.getElementById('chatInput');
-
-                if (isGeneral) {
-                    badge.innerText = "🌍 General Access";
-                    badge.className = "badge general-badge";
-                    instruction.innerText = "You have access to resources across all organizational domains.";
-                    input.placeholder = "Ask anything across all domains...";
-                } else {
-                    badge.innerText = `🔒 ${domain || 'General'} Domain`;
-                    badge.className = "badge";
-                    instruction.innerText = `I am locked to the ${domain || 'selected'} knowledge base provided by your Admin.`;
-                    input.placeholder = `Ask about ${domain || 'resources'}...`;
-                }
-                showView('user');
-            }
-        };
-
-        function logout() {
-            showView('auth');
-            signupForm.reset();
-        }
     </script>
 </body>
 </html>

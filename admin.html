@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI Platform - Admin Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="admin-view">
+        <nav class="top-bar">
+            <span class="logo"><i data-lucide="shield-check"></i> Admin Portal</span>
+            <button class="logout" onclick="logout()"><i data-lucide="log-out"></i></button>
+        </nav>
+        <div class="admin-content">
+            <h1>Upload Resources</h1>
+            <p>Upload files to make them available to users in the selected domain.</p>
+
+            <div class="domain-selector">
+                <label for="uploadDomainSelect">Select Domain for Upload:</label>
+                <select id="uploadDomainSelect">
+                    <option value="" disabled selected>Choose domain...</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Technology">Technology</option>
+                </select>
+            </div>
+
+            <div class="upload-zone" id="uploadZone">
+                <i data-lucide="upload-cloud"></i>
+                <p>Drag & drop PDFs, documents, or training data here</p>
+                <p class="upload-hint">Supported formats: PDF, DOCX, MD, PNG, JPG</p>
+                <button class="btn-primary" onclick="document.getElementById('fileInput').click()">Browse Files</button>
+                <input type="file" id="fileInput" multiple accept=".pdf,.docx,.md,.png,.jpg,.jpeg" style="display: none;">
+            </div>
+
+            <div class="uploaded-files" id="uploadedFiles" style="display: none;">
+                <h3>Uploaded Files</h3>
+                <div id="fileList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ class UserManager {
     }
 
     checkAuthentication() {
-        const userData = JSON.parse(sessionStorage.getItem('nexusUser') || 'null');
+        const userData = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
 
         if (!userData || userData.role !== 'user') {
             window.location.href = 'signup.html';

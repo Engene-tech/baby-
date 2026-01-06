@@ -18,7 +18,7 @@ class AdminManager {
     }
 
     checkAuthentication() {
-        const userData = JSON.parse(sessionStorage.getItem('nexusUser') || 'null');
+        const userData = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
 
         if (!userData || userData.role !== 'admin') {
             window.location.href = 'signup.html';
